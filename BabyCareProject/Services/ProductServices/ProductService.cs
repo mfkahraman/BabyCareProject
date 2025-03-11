@@ -35,10 +35,10 @@ namespace BabyCareProject.Services.ProductServices
             return _mapper.Map<List<ResultProductDto>>(values);
         }
 
-        public async Task<ResultProductDto> GetByIdAsync(string id)
+        public async Task<UpdateProductDto> GetByIdAsync(string id)
         {
             var product = await _productCollection.Find(x=> x.ProductId == id).FirstOrDefaultAsync();
-            return _mapper.Map<ResultProductDto>(product);
+            return _mapper.Map<UpdateProductDto>(product);
         }
 
         public async Task UpdateAsync(UpdateProductDto dto)
