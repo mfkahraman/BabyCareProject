@@ -1,4 +1,6 @@
 using BabyCareProject.DataAccess.Settings;
+using BabyCareProject.Services.InstructorServices;
+using BabyCareProject.Services.ProductServices;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 
@@ -12,6 +14,9 @@ builder.Services.AddSingleton<IDatabaseSettings>(sp =>
 {
     return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
+
+builder.Services.AddScoped<IInstructorService, InstructorService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddControllersWithViews();
 
@@ -31,6 +36,11 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
 
 app.MapControllerRoute(
     name: "default",

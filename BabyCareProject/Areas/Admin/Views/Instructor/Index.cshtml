@@ -1,0 +1,35 @@
+﻿@model List<ResultInstructorDto>
+@{
+    ViewData["Title"] = "Eğitmenler";
+}
+
+<h3>@ViewBag.Title</h3>
+@{
+    int count = 0;
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Profil Fotoğrafı</th>
+        <th>Ad Soyad</th>
+        <th>Ünvan</th>
+        <th>İşlemler</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>@count</td>
+            <td><img src="@item.ImageUrl" style="height:75px;width:75px" /></td>
+            <td>@item.FullName</td>
+            <td>@item.Title</td>
+            <td>
+                <a asp-controller="Instructor" asp-area="Admin" asp-action="UpdateInstructor" asp-route-id="@item.InstructorId" class="btn btn-warning">Güncelle</a>
+                <a asp-controller="Instructor" asp-area="Admin" asp-action="DeleteInstructor" asp-route-id="@item.InstructorId" class="btn btn-danger">Sil</a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-controller="Instructor" asp-area="Admin" asp-action="CreateInstructor" class="btn btn-danger">Yeni Eğitmen Ekle</a>
+

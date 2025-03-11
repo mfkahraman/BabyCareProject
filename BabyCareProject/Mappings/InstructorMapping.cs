@@ -8,9 +8,9 @@ namespace BabyCareProject.Mappings
     {
         public InstructorMapping()
         {
-            CreateMap<ResultInstructorDto, Instructor>().ReverseMap();
-            CreateMap<CreateInstructorDto, Instructor>().ReverseMap();
-            CreateMap<UpdateInstructorDto, Instructor>().ReverseMap();
+            CreateMap<Instructor, ResultInstructorDto>().ReverseMap();
+            CreateMap<Instructor, CreateInstructorDto>().ReverseMap();
+            CreateMap<Instructor, UpdateInstructorDto>().ReverseMap();
         }
     }
 }
