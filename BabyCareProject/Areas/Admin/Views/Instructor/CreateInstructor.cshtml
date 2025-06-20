@@ -1,24 +1,40 @@
 ﻿@model CreateInstructorDto
 
 @{
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
     ViewData["Title"] = "Yeni Eğitmen Ekle";
 }
 
-<h3>@ViewBag.Title</h3>
+<h2 class="mb-4 text-primary"><i class="fas fa-user-plus me-2"></i> Yeni Eğitmen Ekle</h2>
 
-<form method="post">
-    <label>Profil Resmi Url</label>
-    <input type="text" asp-for="ImageUrl" class="form-control" />
-   <br />
-    <label>Ad</label>
-    <input type="text" asp-for="FirstName" class="form-control" />
-    <br />
-    <label>Soyad</label>
-    <input type="text" asp-for="LastName" class="form-control" />
-    <br />
-    <label>Ünvan</label>
-    <input type="text" asp-for="Title" class="form-control" />
-    <br />
+<form method="post" enctype="multipart/form-data" class="row g-4">
+    <div class="col-md-6">
+        <label asp-for="FirstName" class="form-label fw-semibold">Adı</label>
+        <input type="text" asp-for="FirstName" class="form-control" placeholder="Eğitmenin adı" />
+        <span asp-validation-for="FirstName" class="text-danger small"></span>
+    </div>
 
-    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <div class="col-md-6">
+        <label asp-for="LastName" class="form-label fw-semibold">Soyadı</label>
+        <input type="text" asp-for="LastName" class="form-control" placeholder="Eğitmenin soyadı" />
+        <span asp-validation-for="LastName" class="text-danger small"></span>
+    </div>
+
+    <div class="col-md-12">
+        <label asp-for="Title" class="form-label fw-semibold">Ünvan</label>
+        <input type="text" asp-for="Title" class="form-control" placeholder="Örn: Psikolojik Danışman" />
+        <span asp-validation-for="Title" class="text-danger small"></span>
+    </div>
+
+    <div class="col-md-12">
+        <label asp-for="ImageFile" class="form-label fw-semibold">Profil Resmi</label>
+        <input type="file" asp-for="ImageFile" class="form-control" />
+        <span asp-validation-for="ImageFile" class="text-danger small"></span>
+    </div>
+
+    <div class="col-12 text-center mt-4">
+        <button type="submit" class="btn btn-success px-5">
+            <i class="fas fa-save me-2"></i> Kaydet
+        </button>
+    </div>
 </form>
