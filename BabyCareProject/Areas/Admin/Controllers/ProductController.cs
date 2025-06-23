@@ -1,13 +1,15 @@
-﻿using BabyCareProject.Dtos.ProductDtos;
-using BabyCareProject.Services.InstructorServices;
-using BabyCareProject.Services.ProductServices;
+﻿using AutoMapper;
+using BabyCareProject.Business.Abstract;
+using BabyCareProject.Entity.Dtos.ProductDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BabyCareProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ProductController(IProductService productService, IInstructorService instructorService) : Controller
+    public class ProductController(IProductService productService,
+                                   IInstructorService instructorService,
+                                   IMapper mapper) : Controller
     {
         public async Task <IActionResult> Index()
         {
@@ -18,7 +20,7 @@ namespace BabyCareProject.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateProduct()
         {
-            var insturctors = await instructorService.GetAllInstroctarAsync();
+            var insturctors = await instructorService.GetAllAsync();
             ViewBag.Instructors = (from x in insturctors
                                    select new SelectListItem
                                    {
@@ -39,7 +41,7 @@ namespace BabyCareProject.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateProduct(string id)
         {
-            var insturctors = await instructorService.GetAllInstroctarAsync();
+            var insturctors = await instructorService.GetAllAsync();
             ViewBag.Instructors = (from x in insturctors
                                    select new SelectListItem
                                    {
@@ -48,7 +50,8 @@ namespace BabyCareProject.Areas.Admin.Controllers
                                    }).ToList();
 
             var value = await productService.GetByIdAsync(id);
-            return View(value);
+            var dto = mapper.Map<UpdateProductDto>(value);
+            return View(dto);
         }
 
         [HttpPost]

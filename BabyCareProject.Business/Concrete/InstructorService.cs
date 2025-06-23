@@ -33,8 +33,8 @@ namespace BabyCareProject.Business.Concrete
 
         public async Task<ResultInstructorDto> GetByIdAsync(string id)
         {
-            var entity = instructorDal.GetInstructorByIdAsync(id);
-            return await mapper.Map<Task<ResultInstructorDto>>(entity);
+            var entity = await instructorDal.GetInstructorByIdAsync(id);
+            return mapper.Map<ResultInstructorDto>(entity);
         }
 
         public async Task UpdateAsync(UpdateInstructorDto dto)

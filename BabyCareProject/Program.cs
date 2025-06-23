@@ -1,4 +1,7 @@
+using BabyCareProject.Business.Abstract;
+using BabyCareProject.Business.Concrete;
 using BabyCareProject.Business.Mappings;
+using BabyCareProject.DataAccess.Abstract;
 using BabyCareProject.DataAccess.Concrete;
 using BabyCareProject.Entity.Entities;
 using Microsoft.Extensions.Options;
@@ -26,6 +29,17 @@ builder.Services.AddSingleton<IMongoCollection<Instructor>>(sp=>
     return database.GetCollection<Instructor>(settings.InstructorCollectionName);
 });
 
+builder.Services.AddSingleton<IMongoCollection<Product>>(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+    var client = new MongoClient(settings.ConnectionString);
+    var database = client.GetDatabase(settings.DatabaseName);
+    return database.GetCollection<Product>(settings.ProductCollectionName);
+});
+
+
+builder.Services.AddScoped<IInstructorDal, InstructorDal>();
+builder.Services.AddScoped<IProductDal, ProductDal>();
 builder.Services.AddScoped<IInstructorService, InstructorService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();

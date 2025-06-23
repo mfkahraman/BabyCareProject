@@ -14,9 +14,10 @@ namespace BabyCareProject.Business.Mappings
     {
         public InstructorMapping()
         {
-            CreateMap<Instructor, ResultInstructorDto>().ReverseMap();
+            CreateMap<Instructor, ResultInstructorDto>();
             CreateMap<Instructor, CreateInstructorDto>().ReverseMap();
             CreateMap<Instructor, UpdateInstructorDto>().ReverseMap();
+            CreateMap<ResultInstructorDto, UpdateInstructorDto>();
         }
     }
 }

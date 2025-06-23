@@ -1,17 +1,18 @@
-﻿using BabyCareProject.Dtos.InstructorDtos;
-using BabyCareProject.Services.InstructorServices;
-using Booksaw.Business.Abstract;
+﻿using AutoMapper;
+using BabyCareProject.Business.Abstract;
+using BabyCareProject.Entity.Dtos.InstructorDtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabyCareProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class InstructorController(IInstructorService instructorService,
-                                      IImageService imageService) : Controller
+                                      IImageService imageService,
+                                      IMapper mapper) : Controller
     {
         public async Task<IActionResult> Index()
         {
-            var values = await instructorService.GetAllInstroctarAsync();
+            var values = await instructorService.GetAllAsync();
             return View(values);
         }
 
@@ -30,15 +31,16 @@ namespace BabyCareProject.Areas.Admin.Controllers
                 dto.ImageUrl = imagePath;
             }
 
-            await instructorService.CreateInstructorAsync(dto);
+            await instructorService.CreateAsync(dto);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public async Task<IActionResult> UpdateInstructor(string id)
         {
-            var value = await instructorService.GetInstructorByIdAsync(id);
-            return View(value);
+            var value = await instructorService.GetByIdAsync(id);
+            var dto = mapper.Map<UpdateInstructorDto>(value);
+            return View(dto);
         }
 
         [HttpPost]
@@ -50,13 +52,13 @@ namespace BabyCareProject.Areas.Admin.Controllers
                 dto.ImageUrl = imagePath;
             }
 
-            await instructorService.UpdateInstructorAsync(dto);
+            await instructorService.UpdateAsync(dto);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> DeleteInstructor(string id)
         {
-            await instructorService.DeleteInstructorAsync(id);
+            await instructorService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
 
