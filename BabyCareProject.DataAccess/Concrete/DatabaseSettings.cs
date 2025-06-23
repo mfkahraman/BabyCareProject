@@ -1,6 +1,14 @@
-﻿namespace BabyCareProject.DataAccess.Settings
+﻿using BabyCareProject.DataAccess.Abstract;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BabyCareProject.DataAccess.Concrete
 {
     //In mongodb insteadof => wecall; table => collection, row => document, column => field
+
     public class DatabaseSettings : IDatabaseSettings
     {
         public string ConnectionString { get; set; }

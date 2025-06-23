@@ -1,11 +1,13 @@
-﻿using Booksaw.Business.Abstract;
+﻿using BabyCareProject.Business.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Booksaw.Business.Concrete
+namespace BabyCareProject.Business.Concrete
 {
     public class ImageService : IImageService
     {

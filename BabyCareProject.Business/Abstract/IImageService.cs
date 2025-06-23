@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booksaw.Business.Abstract
+namespace BabyCareProject.Business.Abstract
 {
     public interface IImageService
     {

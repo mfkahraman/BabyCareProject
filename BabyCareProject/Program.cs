@@ -1,20 +1,29 @@
-using BabyCareProject.DataAccess.Settings;
-using BabyCareProject.Services.InstructorServices;
-using BabyCareProject.Services.ProductServices;
-using Booksaw.Business.Abstract;
-using Booksaw.Business.Concrete;
+using BabyCareProject.Business.Mappings;
+using BabyCareProject.DataAccess.Concrete;
+using BabyCareProject.Entity.Entities;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection(nameof(DatabaseSettings)));
+builder.Services.AddAutoMapper(typeof(ProductMapping).Assembly);
 
-builder.Services.AddSingleton<IDatabaseSettings>(sp =>
+
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
+
+//builder.Services.AddSingleton<IDatabaseSettings>(sp =>
+//{
+//    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+//});
+
+builder.Services.AddSingleton<IMongoCollection<Instructor>>(sp=>
 {
-    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+    var settings = sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+    var client = new MongoClient(settings.ConnectionString);
+    var database = client.GetDatabase(settings.DatabaseName);
+    return database.GetCollection<Instructor>(settings.InstructorCollectionName);
 });
 
 builder.Services.AddScoped<IInstructorService, InstructorService>();

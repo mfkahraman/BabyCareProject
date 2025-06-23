@@ -1,8 +1,14 @@
 ﻿using AutoMapper;
-using BabyCareProject.DataAccess.Entities;
-using BabyCareProject.Dtos.InstructorDtos;
+using BabyCareProject.Entity.Dtos.InstructorDtos;
+using BabyCareProject.Entity.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace BabyCareProject.Mappings
+namespace BabyCareProject.Business.Mappings
 {
     public class InstructorMapping : Profile
     {
