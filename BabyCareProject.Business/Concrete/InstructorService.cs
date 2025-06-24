@@ -11,37 +11,10 @@ using System.Threading.Tasks;
 
 namespace BabyCareProject.Business.Concrete
 {
-    public class InstructorService(IInstructorDal instructorDal,
-                                   IMapper mapper) : IInstructorService
+    public class InstructorService : GenericService<Instructor, CreateInstructorDto, UpdateInstructorDto, ResultInstructorDto>, IInstructorService
     {
-        public async Task CreateAsync(CreateInstructorDto dto)
+        public InstructorService(IGenericRepository<Instructor> repository, IMapper mapper) : base(repository, mapper)
         {
-            var entity = mapper.Map<Instructor>(dto);
-            await instructorDal.CreateInstructorAsync(entity);
         }
-
-        public async Task DeleteAsync(string id)
-        {
-            await instructorDal.DeleteInstructorAsync(id);
-        }
-
-        public async Task<List<ResultInstructorDto>> GetAllAsync()
-        {
-            var entities = await instructorDal.GetAllInstructorsAsync();
-            return mapper.Map<List<ResultInstructorDto>>(entities);
-        }
-
-        public async Task<ResultInstructorDto> GetByIdAsync(string id)
-        {
-            var entity = await instructorDal.GetInstructorByIdAsync(id);
-            return mapper.Map<ResultInstructorDto>(entity);
-        }
-
-        public async Task UpdateAsync(UpdateInstructorDto dto)
-        {
-            var entity = mapper.Map<Instructor>(dto);
-            await instructorDal.UpdateInstructorAsync(entity);
-        }
-
     }
 }

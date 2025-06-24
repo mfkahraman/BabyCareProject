@@ -10,31 +10,10 @@ using System.Threading.Tasks;
 
 namespace BabyCareProject.DataAccess.Concrete
 {
-    public class ProductDal(IMongoCollection<Product> collection) : IProductDal
+    public class ProductDal : GenericRepository<Product>, IProductDal
     {
-        public async Task CreateAsync(Product entity)
+        public ProductDal(IMongoDatabase database, IDatabaseSettings settings) : base(database, settings.ProductCollectionName)
         {
-            await collection.InsertOneAsync(entity);
-        }
-
-        public async Task DeleteAsync(string id)
-        {
-            await collection.DeleteOneAsync(x => x.ProductId == id);
-        }
-
-        public async Task<List<Product>> GetAllAsync()
-        {
-            return await collection.AsQueryable().ToListAsync();
-        }
-
-        public async Task<Product> GetByIdAsync(string id)
-        {
-            return await collection.Find(x => x.ProductId == id).FirstOrDefaultAsync();
-        }
-
-        public async Task UpdateAsync(Product entity)
-        {
-            await collection.FindOneAndReplaceAsync(x => x.ProductId == entity.ProductId, entity);
         }
     }
 }

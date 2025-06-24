@@ -10,49 +10,60 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// AutoMapper
 builder.Services.AddAutoMapper(typeof(ProductMapping).Assembly);
 
-
+// Database settings
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 
-//builder.Services.AddSingleton<IDatabaseSettings>(sp =>
-//{
-//    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
-//});
+builder.Services.AddSingleton<IDatabaseSettings>(sp =>
+    sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
-builder.Services.AddSingleton<IMongoCollection<Instructor>>(sp=>
+builder.Services.AddSingleton<IMongoDatabase>(sp =>
 {
-    var settings = sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+    var settings = sp.GetRequiredService<IDatabaseSettings>();
     var client = new MongoClient(settings.ConnectionString);
-    var database = client.GetDatabase(settings.DatabaseName);
-    return database.GetCollection<Instructor>(settings.InstructorCollectionName);
+    return client.GetDatabase(settings.DatabaseName);
 });
 
-builder.Services.AddSingleton<IMongoCollection<Product>>(sp =>
+#region Generic Repository Registrations
+
+builder.Services.AddScoped<IGenericRepository<Instructor>>(sp =>
 {
-    var settings = sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
-    var client = new MongoClient(settings.ConnectionString);
-    var database = client.GetDatabase(settings.DatabaseName);
-    return database.GetCollection<Product>(settings.ProductCollectionName);
+    var db = sp.GetRequiredService<IMongoDatabase>();
+    return new GenericRepository<Instructor>(db, "Instructors");
 });
 
+builder.Services.AddScoped<IGenericRepository<Product>>(sp =>
+{
+    var db = sp.GetRequiredService<IMongoDatabase>();
+    return new GenericRepository<Product>(db, "Products");
+});
 
-builder.Services.AddScoped<IInstructorDal, InstructorDal>();
-builder.Services.AddScoped<IProductDal, ProductDal>();
+builder.Services.AddScoped<IGenericRepository<Banner>>(sp =>
+{
+    var db = sp.GetRequiredService<IMongoDatabase>();
+    return new GenericRepository<Banner>(db, "Banners");
+});
+
+#endregion Generic Repository Registrations
+
+#region Services
+
 builder.Services.AddScoped<IInstructorService, InstructorService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IBannerService, BannerService>();
 builder.Services.AddScoped<IImageService, ImageService>();
+
+#endregion Services
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -64,9 +75,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

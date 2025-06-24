@@ -8,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace BabyCareProject.DataAccess.Abstract
 {
-    public interface IProductDal
+    public interface IProductDal : IGenericRepository<Product>
     {
-        Task<List<Product>> GetAllAsync();
-        Task<Product> GetByIdAsync(string id);
-        Task CreateAsync(Product entity);
-        Task UpdateAsync(Product entity);
-        Task DeleteAsync(string id);
+
     }
 }

@@ -8,7 +8,6 @@ namespace BabyCareProject.Entity.Dtos.ProductDtos
 {
     public class CreateProductDto
     {
-        public string ProductId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }

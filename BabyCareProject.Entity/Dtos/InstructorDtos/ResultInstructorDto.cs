@@ -8,7 +8,7 @@ namespace BabyCareProject.Entity.Dtos.InstructorDtos
 {
     public class ResultInstructorDto
     {
-        public string InstructorId { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName => string.Join(" ", FirstName, LastName);

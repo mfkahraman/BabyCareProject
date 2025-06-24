@@ -5,15 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BabyCareProject.Entity.Dtos.InstructorDtos
+namespace BabyCareProject.Entity.Dtos.BannerDtos
 {
-    public class UpdateInstructorDto
+    public class UpdateBannerDto
     {
         public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Slogan { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public string ImageUrl { get; set; }
+        public bool IsActive { get; set; }
 
         public IFormFile ImageFile { get; set; }
     }

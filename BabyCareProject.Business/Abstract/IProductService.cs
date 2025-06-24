@@ -8,12 +8,7 @@ using System.Threading.Tasks;
 
 namespace BabyCareProject.Business.Abstract
 {
-    public interface IProductService
+    public interface IProductService : IGenericService<CreateProductDto, UpdateProductDto, ResultProductDto>
     {
-        Task<List<ResultProductDto>> GetAllAsync();
-        Task<ResultProductDto> GetByIdAsync(string id);
-        Task CreateAsync(CreateProductDto dto);
-        Task UpdateAsync(UpdateProductDto dto);
-        Task DeleteAsync(string id);
     }
 }

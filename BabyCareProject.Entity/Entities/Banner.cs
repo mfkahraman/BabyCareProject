@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace BabyCareProject.Entity.Entities
 {
-    public class Instructor : IEntity
+    public class Banner : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Slogan { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public string ImageUrl { get; set; }
+        public bool IsActive { get; set; }
+        
     }
 }

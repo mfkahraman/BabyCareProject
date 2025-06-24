@@ -5,19 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
-namespace BabyCareProject.Entity.Entities
+namespace BabyCareProject.Entity.Dtos.BannerDtos
 {
-    public class Product : IEntity
+    public class CreateBannerDto
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string Slogan { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
         public string ImageUrl { get; set; }
+        public bool IsActive { get; set; }
 
-        public string InstructorName { get; set; }
+        public IFormFile ImageFile { get; set; }
     }
 }

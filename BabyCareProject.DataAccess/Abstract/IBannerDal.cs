@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace BabyCareProject.DataAccess.Abstract
 {
-    public interface IInstructorDal : IGenericRepository<Instructor>
+    public interface IBannerDal : IGenericRepository<Banner>
     {
-
     }
 }
