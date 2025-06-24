@@ -1,0 +1,62 @@
+﻿@model List<ResultBannerDto>
+
+@{
+    ViewData["Title"] = "Bannerlar";
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+    int count = 0;
+}
+
+<h2 class="mb-4 text-primary">
+    <i class="fas fa-images me-2"></i> Banner Listesi
+</h2>
+
+<table class="table table-bordered table-hover text-center align-middle">
+    <thead class="table-primary">
+        <tr>
+            <th>#</th>
+            <th>Görsel</th>
+            <th>Slogan</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>Aktif Mi?</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>
+                    <img src="@item.ImageUrl" alt="Banner Görseli" style="width: 120px; height: auto;" class="img-thumbnail" />
+                </td>
+                <td>@item.Slogan</td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <span class="badge bg-success">Aktif</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Pasif</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="UpdateBanner" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Banner" class="btn btn-sm btn-warning me-1">
+                        <i class="fas fa-edit"></i> Güncelle
+                    </a>
+                    <a asp-action="DeleteBanner" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Banner" class="btn btn-sm btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?')">
+                        <i class="fas fa-trash"></i> Sil
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="CreateBanner" asp-area="Admin" asp-controller="Banner" class="btn btn-primary mt-3">
+    <i class="fas fa-plus"></i> Yeni Banner Ekle
+</a>
