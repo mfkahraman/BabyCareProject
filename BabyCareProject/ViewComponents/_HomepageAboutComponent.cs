@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BabyCareProject.Business.Abstract;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BabyCareProject.ViewComponents
 {
-    public class _HomepageAboutComponent : ViewComponent
+    public class _HomepageAboutComponent(IAboutService aboutService) : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            // You can pass any model or data to the view if needed
-            return View();
+            var about = await aboutService.GetSingleByFilterAsync(x => x.Title != null);
+            return View(about);
         }
     }
 }
