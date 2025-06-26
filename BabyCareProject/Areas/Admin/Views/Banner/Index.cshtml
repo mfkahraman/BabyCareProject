@@ -45,12 +45,17 @@
                     }
                 </td>
                 <td>
-                    <a asp-action="UpdateBanner" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Banner" class="btn btn-sm btn-warning me-1">
-                        <i class="fas fa-edit"></i> Güncelle
+                    <a asp-action="UpdateBanner" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Banner" class="btn btn-warning me-1">
+                        <i class="fas fa-edit me-1"></i> Güncelle
                     </a>
-                    <a asp-action="DeleteBanner" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Banner" class="btn btn-sm btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?')">
-                        <i class="fas fa-trash"></i> Sil
+                    <a asp-action="DeleteBanner" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Banner" class="btn btn-danger me-1" onclick="return confirm('Silmek istediğinize emin misiniz?')">
+                        <i class="fas fa-trash me-1"></i> Sil
                     </a>
+
+                    <a asp-action="ToggleStatus" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Banner" class="btn btn-secondary">
+                        <i class="fas fa-ban me-1"></i> Aktif/Pasif
+                    </a>
+ 
                 </td>
             </tr>
         }
@@ -58,5 +63,5 @@
 </table>
 
 <a asp-action="CreateBanner" asp-area="Admin" asp-controller="Banner" class="btn btn-primary mt-3">
-    <i class="fas fa-plus"></i> Yeni Banner Ekle
+    <i class="fas fa-plus me-1"></i> Yeni Banner Ekle
 </a>

@@ -16,6 +16,7 @@ namespace BabyCareProject.Business.Mappings
             CreateMap<Banner, ResultBannerDto>();
             CreateMap<Banner, CreateBannerDto>().ReverseMap();
             CreateMap<Banner, UpdateBannerDto>().ReverseMap();
+            CreateMap<ResultBannerDto, UpdateBannerDto>().ReverseMap();
         }
     }
 }

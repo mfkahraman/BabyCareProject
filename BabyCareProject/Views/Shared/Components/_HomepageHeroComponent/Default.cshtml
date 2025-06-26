@@ -1,4 +1,6 @@
-﻿@*
+﻿@model ResultBannerDto
+
+@*
     _HomepageHeroComponent
 *@
 
@@ -6,10 +8,10 @@
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-lg-7 col-md-12">
-                <h1 class="mb-3 text-primary">Gülümseyen Yüzler, Sağlıklı Nesiller</h1>
-                <h1 class="mb-4 display-1 text-white">Çocuk Gelişimi, Etkinlik ve Spa Bir Arada</h1>
+                <h1 class="mb-3 text-primary">@Model.Slogan</h1>
+                <h1 class="mb-4 display-1 text-white">@Model.Title</h1>
                 <p class="text-white mb-4 fs-5">
-                    RoyalBaby'de uzman çocuk gelişimci Ayşenur Bekaroğlu'nun birebir ilgisiyle miniklerin gelişimini destekliyor, eğlenceli aktiviteler ve huzurlu spa seanslarıyla farklı bir deneyim sunuyoruz.
+                    @Model.Description
                 </p>
                 <a href="#services" class="btn btn-primary px-4 py-3 px-md-5 me-4 btn-border-radius">Hemen Keşfet</a>
                 <a href="#contact" class="btn btn-outline-light px-4 py-3 px-md-5 btn-border-radius">Bilgi Al</a>

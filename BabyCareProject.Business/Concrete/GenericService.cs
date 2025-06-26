@@ -5,12 +5,13 @@ using BabyCareProject.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BabyCareProject.Business.Concrete
 {
-    public class GenericService<TEntity, TCreateDto, TUpdateDto, TResultDto> : IGenericService<TCreateDto, TUpdateDto, TResultDto>
+    public class GenericService<TEntity, TCreateDto, TUpdateDto, TResultDto> : IGenericService<TCreateDto, TUpdateDto, TResultDto, TEntity>
         where TEntity : class, IEntity
     {
         private readonly IGenericRepository<TEntity> _repository;
@@ -49,6 +50,18 @@ namespace BabyCareProject.Business.Concrete
         public async Task DeleteAsync(string id)
         {
             await _repository.DeleteAsync(id);
+        }
+
+        public async Task<List<TResultDto>> GetByFilterAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            var entities = await _repository.GetByFilterAsync(filter);
+            return _mapper.Map<List<TResultDto>>(entities);
+        }
+
+        public async Task<TResultDto> GetSingleByFilterAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            var entity = (await _repository.GetByFilterAsync(filter)).FirstOrDefault();
+            return _mapper.Map<TResultDto>(entity);
         }
     }
 }

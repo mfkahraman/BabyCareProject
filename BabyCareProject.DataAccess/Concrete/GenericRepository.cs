@@ -5,6 +5,7 @@ using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,6 +46,11 @@ namespace BabyCareProject.DataAccess.Concrete
         {
             var filter = Builders<T>.Filter.Eq(x => x.Id, id);
             await _collection.DeleteOneAsync(filter);
+        }
+
+        public async Task<List<T>> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _collection.Find(filter).ToListAsync();
         }
     }
 

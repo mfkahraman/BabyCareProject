@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BabyCareProject.Business.Abstract
 {
-    public interface IProductService : IGenericService<CreateProductDto, UpdateProductDto, ResultProductDto>
+    public interface IProductService : IGenericService<CreateProductDto, UpdateProductDto, ResultProductDto, Product>
     {
     }
 }
