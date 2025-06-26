@@ -36,19 +36,29 @@ namespace BabyCareProject.WebUI.Extensions
             services.AddScoped<IGenericRepository<Instructor>>(sp =>
             {
                 var db = sp.GetRequiredService<IMongoDatabase>();
-                return new GenericRepository<Instructor>(db, "Instructors");
+                var settings = sp.GetRequiredService<IDatabaseSettings>();
+                return new GenericRepository<Instructor>(db, settings.InstructorCollectionName);
             });
 
             services.AddScoped<IGenericRepository<Product>>(sp =>
             {
                 var db = sp.GetRequiredService<IMongoDatabase>();
-                return new GenericRepository<Product>(db, "Products");
+                var settings = sp.GetRequiredService<IDatabaseSettings>();
+                return new GenericRepository<Product>(db, settings.ProductCollectionName);
             });
 
             services.AddScoped<IGenericRepository<Banner>>(sp =>
             {
                 var db = sp.GetRequiredService<IMongoDatabase>();
-                return new GenericRepository<Banner>(db, "Banners");
+                var settings = sp.GetRequiredService<IDatabaseSettings>();
+                return new GenericRepository<Banner>(db, settings.BannerCollectionName);
+            });
+
+            services.AddScoped<IGenericRepository<About>>(sp =>
+            {
+                var db = sp.GetRequiredService<IMongoDatabase>();
+                var settings = sp.GetRequiredService<IDatabaseSettings>();
+                return new GenericRepository<About>(db, settings.AboutCollectionName);
             });
 
             return services;
@@ -59,6 +69,7 @@ namespace BabyCareProject.WebUI.Extensions
             services.AddScoped<IInstructorService, InstructorService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IBannerService, BannerService>();
+            services.AddScoped<IAboutService, AboutService>();
             services.AddScoped<IImageService, ImageService>();
 
             return services;

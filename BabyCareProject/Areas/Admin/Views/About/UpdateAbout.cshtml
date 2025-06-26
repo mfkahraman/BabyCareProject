@@ -1,0 +1,71 @@
+﻿@using BabyCareProject.Entity.Dtos.AboutDtos
+@model UpdateAboutDto
+
+@{
+    ViewData["Title"] = "Hakkımızda Bilgisini Güncelle";
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2 class="mb-4 text-primary">
+    <i class="fas fa-edit me-2"></i> Hakkımızda Bilgisini Güncelle
+</h2>
+
+<form asp-action="UpdateAbout" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Title" class="form-label">Başlık</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="Feature1" class="form-label">Özellik 1</label>
+            <input asp-for="Feature1" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Feature2" class="form-label">Özellik 2</label>
+            <input asp-for="Feature2" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Feature3" class="form-label">Özellik 3</label>
+            <input asp-for="Feature3" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Feature4" class="form-label">Özellik 4</label>
+            <input asp-for="Feature4" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Feature5" class="form-label">Özellik 5</label>
+            <input asp-for="Feature5" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Feature6" class="form-label">Özellik 6</label>
+            <input asp-for="Feature6" class="form-control" />
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label asp-for="VideoUrl" class="form-label">Video Linki</label>
+            <input asp-for="VideoUrl" class="form-control" placeholder="https://..." />
+            <span asp-validation-for="VideoUrl" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 mt-3">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save me-1"></i> Güncelle
+            </button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Geri Dön</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

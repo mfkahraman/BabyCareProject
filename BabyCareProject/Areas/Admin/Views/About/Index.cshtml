@@ -1,0 +1,68 @@
+﻿@using BabyCareProject.Entity.Dtos.AboutDtos
+@model List<ResultAboutDto>
+
+@{
+    ViewData["Title"] = "Hakkımızda Bilgileri";
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+    int count = 0;
+}
+
+<h2 class="mb-4 text-primary">
+    <i class="fas fa-info-circle me-2"></i> Hakkımızda Alanı
+</h2>
+
+<table class="table table-bordered table-hover text-center align-middle">
+    <thead class="table-primary">
+        <tr>
+            <th>#</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>Özellikler</th>
+            <th>Video Linki</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td class="text-start">
+                    <ul class="list-unstyled mb-0">
+                        @if (!string.IsNullOrWhiteSpace(item.Feature1)) { <li>• @item.Feature1</li> }
+                        @if (!string.IsNullOrWhiteSpace(item.Feature2)) { <li>• @item.Feature2</li> }
+                        @if (!string.IsNullOrWhiteSpace(item.Feature3)) { <li>• @item.Feature3</li> }
+                        @if (!string.IsNullOrWhiteSpace(item.Feature4)) { <li>• @item.Feature4</li> }
+                        @if (!string.IsNullOrWhiteSpace(item.Feature5)) { <li>• @item.Feature5</li> }
+                        @if (!string.IsNullOrWhiteSpace(item.Feature6)) { <li>• @item.Feature6</li> }
+                    </ul>
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.VideoUrl))
+                    {
+                        <a href="@item.VideoUrl" target="_blank" class="btn btn-sm btn-secondary">İzle</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Yok</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="UpdateAbout" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">
+                        <i class="fas fa-edit"></i> Güncelle
+                    </a>
+                    <a asp-action="DeleteAbout" asp-route-id="@item.Id" class="btn btn-sm btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?')">
+                        <i class="fas fa-trash"></i> Sil
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="CreateAbout" class="btn btn-primary mt-3">
+    <i class="fas fa-plus"></i> Yeni Hakkımızda Bilgisi Ekle
+</a>
