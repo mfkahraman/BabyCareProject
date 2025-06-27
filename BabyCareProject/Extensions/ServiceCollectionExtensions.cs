@@ -59,6 +59,13 @@ namespace BabyCareProject.WebUI.Extensions
                 var db = sp.GetRequiredService<IMongoDatabase>();
                 var settings = sp.GetRequiredService<IDatabaseSettings>();
                 return new GenericRepository<About>(db, settings.AboutCollectionName);
+            });            
+            
+            services.AddScoped<IGenericRepository<OurService>>(sp =>
+            {
+                var db = sp.GetRequiredService<IMongoDatabase>();
+                var settings = sp.GetRequiredService<IDatabaseSettings>();
+                return new GenericRepository<OurService>(db, settings.OurServiceCollectionName);
             });
 
             return services;
@@ -70,6 +77,7 @@ namespace BabyCareProject.WebUI.Extensions
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IBannerService, BannerService>();
             services.AddScoped<IAboutService, AboutService>();
+            services.AddScoped<IOurServiceService, OurServiceService>();
             services.AddScoped<IImageService, ImageService>();
 
             return services;
@@ -79,6 +87,7 @@ namespace BabyCareProject.WebUI.Extensions
         {
             services.AddFluentValidationAutoValidation();
             services.AddFluentValidationClientsideAdapters();
+            // Register all validators from the assembly containing the CreateBannerDtoValidator
             services.AddValidatorsFromAssemblyContaining<CreateBannerDtoValidator>();
 
             return services;

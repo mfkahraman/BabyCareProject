@@ -1,0 +1,52 @@
+﻿@using BabyCareProject.Entity.Dtos.OurServiceDtos
+@model CreateOurServiceDto
+@{
+    ViewData["Title"] = "Yeni Hizmet Ekle";
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2 class="mb-4 text-primary">
+    <i class="fas fa-plus-circle me-2"></i> Yeni Hizmet Ekle
+</h2>
+
+<form asp-action="CreateOurService" method="post">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Title" class="form-label">Başlık</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="IconUrl" class="form-label">İkon Sınıfı</label>
+            <input asp-for="IconUrl" class="form-control" placeholder="Örn: fa-solid fa-heart" />
+            <span asp-validation-for="IconUrl" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="IsActive" class="form-label">Aktif Mi?</label>
+            <select asp-for="IsActive" class="form-select">
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
+            </select>
+            <span asp-validation-for="IsActive" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 mt-3">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save me-1"></i> Kaydet
+            </button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Geri Dön</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

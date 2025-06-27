@@ -17,5 +17,6 @@ namespace BabyCareProject.DataAccess.Concrete
         public string ProductCollectionName { get; set; }
         public string BannerCollectionName { get; set; }
         public string AboutCollectionName { get; set; }
+        public string OurServiceCollectionName { get; set; }
     }
 }
