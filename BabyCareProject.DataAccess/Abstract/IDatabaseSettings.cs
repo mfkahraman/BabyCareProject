@@ -15,5 +15,6 @@ namespace BabyCareProject.DataAccess.Abstract
         public string BannerCollectionName { get; set; }
         public string AboutCollectionName { get; set; }
         public string OurServiceCollectionName { get; set; }
+        public string OurProgramCollectionName { get; set; }
     }
 }
