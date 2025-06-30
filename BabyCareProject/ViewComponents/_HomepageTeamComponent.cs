@@ -8,7 +8,7 @@ namespace BabyCareProject.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var allInstuctors = await instructorService.GetAllAsync();
-            var lastThree = allInstuctors.OrderByDescending(x=> x.Id).Take(3).ToList();
+            var lastThree = allInstuctors.OrderByDescending(x=> x.Id).Take(4).ToList();
             return View(lastThree);
         }
     }

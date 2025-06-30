@@ -1,13 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BabyCareProject.Business.Abstract;
+using BabyCareProject.Entity.Dtos.OurProgramDtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BabyCareProject.ViewComponents
 {
-    public class _HomepageProgramsComponent : ViewComponent
+    public class _HomepageProgramsComponent(IOurProgramService programService, IInstructorService instructorService) : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            // You can pass any model or data to the view if needed
-            return View();
+            var programs = await programService.GetByFilterAsync(x => x.IsActive);
+            var instructors = await instructorService.GetAllAsync();
+
+            var result = programs.Select(p =>
+            {
+                var instructor = instructors.FirstOrDefault(i => i.Id == p.InstructorId);
+                return new OurProgramWithInstructorViewModel
+                {
+                    Program = p,
+                    InstructorFullName = $"{instructor?.FirstName} {instructor?.LastName}",
+                    InstructorTitle = instructor?.Title,
+                    InstructorImageUrl = instructor?.ImageUrl
+                };
+            }).Take(3).ToList();
+
+            return View(result);
         }
     }
 }

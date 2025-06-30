@@ -1,4 +1,6 @@
-﻿namespace BabyCareProject.Entity.Dtos.OurProgramDtos
+﻿using Microsoft.AspNetCore.Http;
+
+namespace BabyCareProject.Entity.Dtos.OurProgramDtos
 {
     public class UpdateOurProgramDto
     {
@@ -12,5 +14,6 @@
         public int DurationMinute { get; set; }
         public decimal Price { get; set; }
         public bool IsActive { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 }

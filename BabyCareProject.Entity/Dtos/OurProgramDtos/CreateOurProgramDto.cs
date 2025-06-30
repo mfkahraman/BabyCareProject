@@ -1,4 +1,6 @@
-﻿namespace BabyCareProject.Entity.Dtos.OurProgramDtos
+﻿using Microsoft.AspNetCore.Http;
+
+namespace BabyCareProject.Entity.Dtos.OurProgramDtos
 {
     public class CreateOurProgramDto
     {
@@ -10,5 +12,6 @@
         public int SessionCount { get; set; }
         public int DurationMinute { get; set; }
         public decimal Price { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 }

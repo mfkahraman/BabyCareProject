@@ -1,0 +1,60 @@
+﻿@using BabyCareProject.Entity.Dtos.OurProgramDtos
+@model List<OurProgramWithInstructorViewModel>
+
+@{
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+    ViewData["Title"] = "Programlar";
+}
+
+<div class="container-fluid px-5">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+        <h2 class="mb-0">Program Listesi</h2>
+        <a class="btn btn-primary text-white btn-sm" href="/Admin/OurProgram/CreateOurProgram">Yeni Program Ekle</a>
+    </div>
+
+    <table class="table table-bordered table-hover align-middle text-center">
+        <thead class="table-primary">
+            <tr>
+                <th>Program Adı</th>
+                <th>Eğitmen</th>
+                <th>Title</th>
+                <th>Açıklama</th>
+                <th>Kapasite</th>
+                <th>Seans</th>
+                <th>Süre (dk)</th>
+                <th>Fiyat</th>
+                <th>Durum</th>
+                <th class="text-center">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Program.Title</td>
+                    <td>@item.InstructorFullName</td>
+                    <td>@item.InstructorTitle</td>
+                    <td>@item.Program.Description</td>
+                    <td>@item.Program.Capacity</td>
+                    <td>@item.Program.SessionCount</td>
+                    <td>@item.Program.DurationMinute</td>
+                    <td>@item.Program.Price₺</td>
+                    <td>
+                        @if (item.Program.IsActive)
+                        {
+                            <span class="badge bg-success">Aktif</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Pasif</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        <a href="/Admin/OurProgram/UpdateOurProgram/@item.Program.Id" class="btn btn-sm btn-warning me-1">Güncelle</a>
+                        <a href="/Admin/OurProgram/DeleteOurProgram/@item.Program.Id" class="btn btn-sm btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

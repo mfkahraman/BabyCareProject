@@ -1,0 +1,84 @@
+﻿@using BabyCareProject.Entity.Dtos.OurProgramDtos
+@model CreateOurProgramDto
+
+@{
+    ViewData["Title"] = "Yeni Program Oluştur";
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+    var instructors = ViewBag.Instructors as List<ResultInstructorDto>;
+}
+
+<h2 class="mb-4 text-primary">
+    <i class="fas fa-plus-circle me-2"></i> Yeni Eğitim Programı Oluştur
+</h2>
+
+<form asp-action="CreateOurProgram" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Title" class="form-label">Başlık</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="InstructorId" class="form-label">Eğitmen</label>
+            <select asp-for="InstructorId" class="form-select">
+                <option value="">-- Eğitmen Seçin --</option>
+                @if (instructors != null)
+                {
+                    foreach (var instructor in instructors)
+                    {
+                        <option value="@instructor.Id">@instructor.FullName</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="InstructorId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Capacity" class="form-label">Kapasite</label>
+            <input asp-for="Capacity" class="form-control" />
+            <span asp-validation-for="Capacity" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="SessionCount" class="form-label">Seans Sayısı</label>
+            <input asp-for="SessionCount" class="form-control" />
+            <span asp-validation-for="SessionCount" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="DurationMinute" class="form-label">Seans Süresi (dk)</label>
+            <input asp-for="DurationMinute" class="form-control" />
+            <span asp-validation-for="DurationMinute" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="Price" class="form-label">Fiyat (₺)</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="ImageFile" class="form-label">Görsel Yükle</label>
+            <input asp-for="ImageFile" type="file" class="form-control" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 mt-3">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save me-1"></i> Kaydet
+            </button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Geri Dön</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
