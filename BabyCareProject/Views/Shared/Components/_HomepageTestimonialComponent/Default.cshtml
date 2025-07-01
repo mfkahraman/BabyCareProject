@@ -1,98 +1,48 @@
-﻿@*
-    _HomepageTestimonialComponent
-*@
+﻿@using BabyCareProject.Entity.Dtos.TestimonialDtos
+@model List<ResultTestimonialDto>
 
-<div class="container-fluid testimonial py-5 bg-light">
+<div class="container-fluid testimonial py-5">
     <div class="container py-5">
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Aileler Ne Diyor?</h4>
-            <h1 class="mb-5 display-3">Gönül Rahatlığıyla Tercih Edilen Bir Merkez</h1>
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Veli Yorumları</h4>
+            <h1 class="mb-5 display-3">Bizim Hakkımızda Ne Diyorlar?</h1>
         </div>
-
         <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.3s">
-            <!-- Yorum 1 -->
-            <div class="testimonial-item img-border-radius bg-white border border-primary p-4">
-                <div class="p-4 position-relative">
-                    <i class="fa fa-quote-right fa-2x text-primary position-absolute" style="top: 15px; right: 15px;"></i>
-                    <div class="d-flex align-items-center">
-                        <div class="border border-primary bg-white rounded-circle">
-                            <img src="~/BabyCare-1.0.0/img/testimonial-1.jpg" class="rounded-circle p-2" style="width: 80px; height: 80px;" alt="">
-                        </div>
-                        <div class="ms-4">
-                            <h4 class="text-dark">Elif Aydın</h4>
-                            <p class="m-0 pb-3">Öğretmen & Anne</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border-top border-primary mt-4 pt-3">
-                        <p class="mb-0">
-                            Kızımın gelişiminde gözle görülür bir fark yarattılar. Ayşenur Hanım’ın ilgisi ve profesyonelliği sayesinde içim çok rahat.
-                        </p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Yorum 2 -->
-            <div class="testimonial-item img-border-radius bg-white border border-primary p-4">
-                <div class="p-4 position-relative">
-                    <i class="fa fa-quote-right fa-2x text-primary position-absolute" style="top: 15px; right: 15px;"></i>
-                    <div class="d-flex align-items-center">
-                        <div class="border border-primary bg-white rounded-circle">
-                            <img src="~/BabyCare-1.0.0/img/testimonial-2.jpg" class="rounded-circle p-2" style="width: 80px; height: 80px;" alt="">
-                        </div>
-                        <div class="ms-4">
-                            <h4 class="text-dark">Burak Demir</h4>
-                            <p class="m-0 pb-3">Mühendis & Baba</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star-half-alt text-primary"></i>
+            @foreach (var item in Model)
+            {
+                <div class="testimonial-item img-border-radius bg-light border border-primary p-4">
+                    <div class="p-4 position-relative">
+                        <i class="fa fa-quote-right fa-2x text-primary position-absolute" style="top: 15px; right: 15px;"></i>
+                        <div class="d-flex align-items-center">
+                            <div class="border border-primary bg-white rounded-circle">
+                                <img src="@item.ImageUrl" class="rounded-circle p-2" style="width: 80px; height: 80px;" alt="Veli Fotoğrafı">
+                            </div>
+                            <div class="ms-4">
+                                <h4 class="text-dark">@item.FullName</h4>
+                                <p class="m-0 pb-3">@item.Title</p>
+                                <div class="d-flex pe-5">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= item.Rating)
+                                        {
+                                            <i class="fas fa-star text-primary"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="far fa-star text-primary"></i>
+                                        }
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="border-top border-primary mt-4 pt-3">
-                        <p class="mb-0">
-                            Etkinlikler hem eğitici hem eğlenceli. Spa hizmetleri ise oğlumun rahatlamasına çok yardımcı oldu. Tavsiye ederim.
-                        </p>
+                        <div class="border-top border-primary mt-4 pt-3">
+                            <p class="mb-0">@item.Comment</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
 
-            <!-- Yorum 3 -->
-            <div class="testimonial-item img-border-radius bg-white border border-primary p-4">
-                <div class="p-4 position-relative">
-                    <i class="fa fa-quote-right fa-2x text-primary position-absolute" style="top: 15px; right: 15px;"></i>
-                    <div class="d-flex align-items-center">
-                        <div class="border border-primary bg-white rounded-circle">
-                            <img src="~/BabyCare-1.0.0/img/testimonial-3.jpg" class="rounded-circle p-2" style="width: 80px; height: 80px;" alt="">
-                        </div>
-                        <div class="ms-4">
-                            <h4 class="text-dark">Zeynep Koç</h4>
-                            <p class="m-0 pb-3">Psikolog & Anne</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border-top border-primary mt-4 pt-3">
-                        <p class="mb-0">
-                            Gelişimsel danışmanlık sürecinde bana da rehber oldular. Sadece çocuklara değil, ailelere de destek veren bir merkez.
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

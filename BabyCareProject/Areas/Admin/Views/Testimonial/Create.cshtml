@@ -1,0 +1,39 @@
+﻿@* Create.cshtml *@
+@model BabyCareProject.Entity.Dtos.TestimonialDtos.CreateTestimonialDto
+
+@{
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+    ViewData["Title"] = "Yeni Testimonial Ekle";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Yeni Testimonial Ekle</h2>
+    <form asp-action="Create" asp-controller="Testimonial" asp-area="Admin" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Ad Soyad</label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Unvan</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Yorum</label>
+            <textarea asp-for="Comment" class="form-control"></textarea>
+            <span asp-validation-for="Comment" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Puan (1-5)</label>
+            <input asp-for="Rating" type="number" class="form-control" />
+            <span asp-validation-for="Rating" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Fotoğraf</label>
+            <input asp-for="ImageFile" type="file" class="form-control" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+    </form>
+</div>

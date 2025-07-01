@@ -80,6 +80,13 @@ namespace BabyCareProject.WebUI.Extensions
                 var db = sp.GetRequiredService<IMongoDatabase>();
                 var settings = sp.GetRequiredService<IDatabaseSettings>();
                 return new GenericRepository<Event>(db, settings.EventCollectionName);
+            });            
+            
+            services.AddScoped<IGenericRepository<Testimonial>>(sp =>
+            {
+                var db = sp.GetRequiredService<IMongoDatabase>();
+                var settings = sp.GetRequiredService<IDatabaseSettings>();
+                return new GenericRepository<Testimonial>(db, settings.TestimonialCollectionName);
             });
 
             return services;
@@ -94,6 +101,7 @@ namespace BabyCareProject.WebUI.Extensions
             services.AddScoped<IOurServiceService, OurServiceService>();
             services.AddScoped<IOurProgramService, OurProgramService>();
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<ITestimonialService, TestimonialService>();
             services.AddScoped<IImageService, ImageService>();
 
             return services;

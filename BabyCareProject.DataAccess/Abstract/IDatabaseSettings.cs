@@ -17,5 +17,6 @@ namespace BabyCareProject.DataAccess.Abstract
         public string OurServiceCollectionName { get; set; }
         public string OurProgramCollectionName { get; set; }
         public string EventCollectionName { get; set; }
+        public string TestimonialCollectionName { get; set; }
     }
 }
