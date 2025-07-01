@@ -1,84 +1,47 @@
-﻿@*
-    _HomepageEventsComponent
-*@
+﻿@model List<BabyCareProject.Entity.Dtos.EventDtos.ResultEventDto>
 
 <div class="container-fluid events py-5 bg-light">
     <div class="container py-5">
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
             <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius">Etkinliklerimiz</h4>
-            <h1 class="mb-5 display-3">Yaklaşan RoyalBaby Etkinlikleri</h1>
+            <h1 class="mb-5 display-3">Yaklaşan Etkinliklerimiz</h1>
         </div>
         <div class="row g-5 justify-content-center">
-
-            <!-- Etkinlik 1 -->
-            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeIn" data-wow-delay="0.1s">
-                <div class="events-item bg-primary rounded">
-                    <div class="events-inner position-relative">
-                        <div class="events-img overflow-hidden rounded-circle position-relative">
-                            <img src="~/BabyCare-1.0.0/img/event-1.jpg" class="img-fluid w-100 rounded-circle" alt="Sanat Atölyesi">
-                            <div class="event-overlay">
-                                <a href="~/BabyCare-1.0.0/img/event-1.jpg" data-lightbox="event-1"><i class="fas fa-search-plus text-white fa-2x"></i></a>
+            @foreach (var item in Model)
+            {
+                var date = DateTime.Parse(item.Date);
+                <div class="col-md-6 col-lg-6 col-xl-4 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="events-item bg-primary rounded">
+                        <div class="events-inner position-relative">
+                            <div class="events-img overflow-hidden rounded-circle position-relative">
+                                <img src="@item.ImageUrl" class="img-fluid w-100 rounded-circle" alt="Etkinlik Görseli">
+                                <div class="event-overlay">
+                                    <a href="@item.ImageUrl" data-lightbox="event-@item.Id">
+                                        <i class="fas fa-search-plus text-white fa-2x"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-4 py-2 bg-secondary text-white text-center events-rate">
+                                @date.ToString("dd MMM", new System.Globalization.CultureInfo("tr-TR"))
+                            </div>
+                            <div class="d-flex justify-content-between px-4 py-2 bg-secondary">
+                                <small class="text-white">
+                                    <i class="fas fa-calendar me-1 text-primary"></i>
+                                    @item.StartTime - @item.EndTime
+                                </small>
+                                <small class="text-white">
+                                    <i class="fas fa-map-marker-alt me-1 text-primary"></i>
+                                    @item.Location
+                                </small>
                             </div>
                         </div>
-                        <div class="px-4 py-2 bg-secondary text-white text-center events-rate">5 Tem</div>
-                        <div class="d-flex justify-content-between px-4 py-2 bg-secondary">
-                            <small class="text-white"><i class="fas fa-calendar me-1 text-primary"></i> 11:00 - 13:00</small>
-                            <small class="text-white"><i class="fas fa-map-marker-alt me-1 text-primary"></i> RoyalBaby Merkezi</small>
+                        <div class="events-text p-4 border border-primary bg-white border-top-0 rounded-bottom">
+                            <a href="#" class="h4">@item.Title</a>
+                            <p class="mb-0 mt-3">@item.Description</p>
                         </div>
-                    </div>
-                    <div class="events-text p-4 border border-primary bg-white border-top-0 rounded-bottom">
-                        <a href="#" class="h4">Müzik ve Sanat Atölyesi</a>
-                        <p class="mb-0 mt-3">Çocukların ritim duygusunu ve ince motor becerilerini geliştirici eğlenceli sanat etkinlikleri.</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- Etkinlik 2 -->
-            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeIn" data-wow-delay="0.3s">
-                <div class="events-item bg-primary rounded">
-                    <div class="events-inner position-relative">
-                        <div class="events-img overflow-hidden rounded-circle position-relative">
-                            <img src="~/BabyCare-1.0.0/img/event-2.jpg" class="img-fluid w-100 rounded-circle" alt="Duyusal Oyun">
-                            <div class="event-overlay">
-                                <a href="~/BabyCare-1.0.0/img/event-2.jpg" data-lightbox="event-2"><i class="fas fa-search-plus text-white fa-2x"></i></a>
-                            </div>
-                        </div>
-                        <div class="px-4 py-2 bg-secondary text-white text-center events-rate">12 Tem</div>
-                        <div class="d-flex justify-content-between px-4 py-2 bg-secondary">
-                            <small class="text-white"><i class="fas fa-calendar me-1 text-primary"></i> 10:00 - 11:30</small>
-                            <small class="text-white"><i class="fas fa-map-marker-alt me-1 text-primary"></i> RoyalBaby Bahçesi</small>
-                        </div>
-                    </div>
-                    <div class="events-text p-4 border border-primary bg-white border-top-0 rounded-bottom">
-                        <a href="#" class="h4">Duyusal Oyun Günü</a>
-                        <p class="mb-0 mt-3">Bebekler için su, kum, köpük ve doğal materyallerle keşif ve öğrenme dolu bir etkinlik.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Etkinlik 3 -->
-            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeIn" data-wow-delay="0.5s">
-                <div class="events-item bg-primary rounded">
-                    <div class="events-inner position-relative">
-                        <div class="events-img overflow-hidden rounded-circle position-relative">
-                            <img src="~/BabyCare-1.0.0/img/event-3.jpg" class="img-fluid w-100 rounded-circle" alt="Anne Baba Buluşması">
-                            <div class="event-overlay">
-                                <a href="~/BabyCare-1.0.0/img/event-3.jpg" data-lightbox="event-3"><i class="fas fa-search-plus text-white fa-2x"></i></a>
-                            </div>
-                        </div>
-                        <div class="px-4 py-2 bg-secondary text-white text-center events-rate">18 Tem</div>
-                        <div class="d-flex justify-content-between px-4 py-2 bg-secondary">
-                            <small class="text-white"><i class="fas fa-calendar me-1 text-primary"></i> 14:00 - 16:00</small>
-                            <small class="text-white"><i class="fas fa-map-marker-alt me-1 text-primary"></i> Danışmanlık Salonu</small>
-                        </div>
-                    </div>
-                    <div class="events-text p-4 border border-primary bg-white border-top-0 rounded-bottom">
-                        <a href="#" class="h4">Ebeveyn Sohbeti</a>
-                        <p class="mb-0 mt-3">Ayşenur Bekaroğlu ile gelişim odaklı aile danışmanlığı temalı interaktif buluşma.</p>
-                    </div>
-                </div>
-            </div>
-
+            }
         </div>
     </div>
 </div>
